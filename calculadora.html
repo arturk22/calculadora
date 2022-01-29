@@ -1,39 +1,118 @@
 <meta charset="utf-8">
 
-<h1>Calculadora</h1>
-
-<p id="visorCima"></p>
-<p id="visor"></p>
 
 
+
+<style>
+
+	.calculadora{
+		color: white;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		background-color: black;
+		border-radius: 12px;
+		border: none;
+		padding: 15px;
+	}
+
+	.botaotop{
+		width: 50px;
+		height: 50px;
+		font-size: 25px;
+		border-radius: 10px;
+		border: none;
+		background-image: linear-gradient(-45deg,#335998,#473D86,#413982);
+		color: white;
+
+
+	}
+
+	.botaoDireita{
+		width: 50px;
+		height: 50px;
+		font-size: 25px;
+		border-radius: 10px;
+		background-image: linear-gradient(105deg, #3266A2, #3365A4, #397559);
+		border: none;
+		color: white;
+
+	}
+	.botao{
+		width: 50px;
+		height: 50px;
+		font-size: 25px;
+		border-radius: 10px;
+		border: none;
+		background-image: linear-gradient(90deg, #EBEEF5, #F0EBF2, #F9EAF1);
+		color: rgb(100, 98, 99);
+		
+	}
+
+	.visor{
+		height: 100px;
+		width: auto;
+		font-size: 25px;
+		border-radius: 5px;
+		text-align: right;
+		background-image: linear-gradient(105deg, #EAEFF5, #EBEBF3, #EBE8F1);
+
+	}
+
+	#visorCima{
+		font-size: 15px;
+
+	}
+
+</style>
+
+<body>
+	
+<div class="calculadora">
+	<h1>Calculadora</h1>
+
+<div class="visor" style="color: black;">
+	<p id="visorCima"></p>
+	<p id="visor"></p>
+</div>
+	
 <table>
 	<tr>
-		<td><button class="botao" onclick= clean()>AC</button></td>
-		<td><button class="botao" onclick= apagaVisor()>CE</button></td>
-		<td><button class="botao" onclick=apagar()><<</button></td>
-		<td><button class="botao" onclick="inserir('/'); inserirCima()">/</button></td>
+		<td><button class="botaoTop" onclick= clean()>AC</button></td>
+		<td><button class="botaoTop" onclick= apagaVisor()>CE</button></td>
+		<td><button class="botaoTop" onclick=apagar()><<</button></td>
+		<td><button class="botaoTop" onclick="inserir('/'); inserirCima()">/</button></td>
 	</tr>
 	<tr>
 		<td><button class="botao" onclick="inserir('7')">7</button></td>
 		<td><button class="botao" onclick="inserir('8')">8</button></td>
 		<td><button class="botao" onclick="inserir('9')">9</button></td>
-		<td><button class="botao" onclick="inserir('*'); inserirCima()">X</button></td>
+		<td><button class="botaoDireita" onclick="inserir('*'); inserirCima()">X</button></td>
 	</tr>
-	<tr><td><button class="botao" onclick="inserir('4')">4</button></td>
+	<tr>
+		<td><button class="botao" onclick="inserir('4')">4</button></td>
 		<td><button class="botao" onclick="inserir('5')">5</button></td>
 		<td><button class="botao" onclick="inserir('6')">6</button></td>
-		<td><button class="botao" onclick="inserir('-'); inserirCima()">-</button></td>
+		<td><button class="botaoDireita" onclick="inserir('-'); inserirCima()">-</button></td>
 	</tr>
-	<tr><td><button class="botao" onclick="inserir('1')">1</button></td>
+	<tr>
+		<td><button class="botao" onclick="inserir('1')">1</button></td>
 		<td><button class="botao" onclick="inserir('2')">2</button></td>
 		<td><button class="botao" onclick="inserir('3')">3</button></td>
-		<td><button class="botao" onclick="inserir('+'); inserirCima()">+</button></td>
+		<td><button class="botaoDireita" onclick="inserir('+'); inserirCima()">+</button></td>
 	</tr>
-	<tr><td><button class="botao" onclick="inserir('0')">0</button></td>
+	<tr>
+		<td colspan="2"><button class="botao" onclick="inserir('0')" style="width: 106px;" >0</button></td>
 		<td><button class="botao" onclick="inserir('.')">,</button></td>
-		<td><button class="botao" onclick= calcular()>=</button></td>
+		<td><button class="botaoDireita" onclick= calcular()>=</button></td>
 	</tr>
 </table>
+</div>
+
+</body>
+
+
 
 <script>
 	
@@ -51,7 +130,6 @@
 	function apagar(){
 
 			var visor = document.getElementById('visor').innerHTML
-
 			document.getElementById('visor').innerHTML = visor.substring(0, visor.length -1)
 
 	}
@@ -66,23 +144,31 @@
 
 	function inserir(num){
 
-		var numero = document.getElementById('visor').innerHTML
-		document.getElementById('visor').innerHTML = numero+num
+		let visor = document.getElementById("visor");
+
+		let entradaInvalida = /[+-\/*]/.test(num) && /[+-\/*]$/.test(visor.innerHTML);
+
+			if (entradaInvalida) {
+				return
+			}
+
+		visor.innerHTML = visor.innerHTML+num;
 
 
-	}
-
+		}
+		
 	function calcular(){
 
-		var visor = document.getElementById('visor').innerHTML
-		var visorCima = document.getElementById('visorCima').innerHTML
+		var elementVisor = document.getElementById('visor')
+		var elementVisorCima = document.getElementById('visorCima')
+
+		var visor = elementVisor.innerHTML
+		var visorCima = elementVisorCima.innerHTML
 		var resultado = eval(visorCima+visor)
 		document.getElementById('visorCima').innerHTML = ''
 		document.getElementById('visor').innerHTML = resultado
 	
-
 	}
 
-	
-
 </script>
+
