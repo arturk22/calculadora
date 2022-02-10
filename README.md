@@ -3,7 +3,7 @@ Primeiro Desafio do Desenvolve 2022
 
 ## Desafio
 
-Fazer uma calculadora de acordo com o exemplo proposto pelo mentor.
+Fazer uma calculadora funcional, de acordo com o exemplo proposto pelo mentor.
 
 ### Modelo proposto:
 
